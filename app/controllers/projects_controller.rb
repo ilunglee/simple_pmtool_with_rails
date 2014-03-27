@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+
+  before_action :find_project, only: [:show, :edit, :update, :destroy]
   
   def index
     @projects = Project.all
@@ -9,19 +11,13 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find (params[:id])
   end
 
   def edit
-    @project = Project.find (params[:id])
-    render :new
   end
 
   def update
-    @project = Project.find (params[:id])
-    @project.update_attributes(project_attributes)
-
-    if @project.save
+    if @project.update_attributes(project_attributes)
       redirect_to projects_path
     else
       flash.now[:error] = "please correct the form"
@@ -33,21 +29,23 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_attributes)
     
     if @project.save
-      redirect_to projects_path
+      redirect_to @project
     else
       flash.now[:error] = "please correct the form"
-      render :new
+      render :edit
     end
   end
 
   def destroy
-    @project = Project.find (params[:id])
     @project.destroy
-    
     redirect_to projects_path
   end
 
   private
+
+  def find_project
+    @project = Project.find params[:id]
+  end
 
   def project_attributes
     params.require(:project).permit( [:title, :description] )
