@@ -1,9 +1,18 @@
 <div class="container">
 <h1>default home</h1>
 <% @projects.each do |project| %>
-  <h2><%= link_to project.title, project_path(project.id)%></h2>
-  <p> <%= project.created_at.strftime("%Y-%b-%d") %></p>
-  <p> <%= project.description %> </p>
+  <div class="row">
+    <div class="col-md-9"><h2><%= link_to project.title, project_path(project.id) %></h2></div>
+    <div class="col-md-3 heading">
+      <%= link_to "Edit", edit_project_path(project.id), class: "btn btn-default" %>
+      <%= button_to 'Delete', project_path(project.id),
+          method: "delete", class: "btn btn-danger", confirm: 'Are you sure' %>
+    </div>
+  </div>
+  <div class="row">
+    <p class="col-md-12"> <%= project.created_at.strftime("%Y-%b-%d") %></p>
+    <p class="col-md-12"> <%= project.description %> </p>
+  </div>
   <hr>
 <% end %>
 </div>

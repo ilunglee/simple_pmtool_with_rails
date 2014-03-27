@@ -8,12 +8,12 @@
   padding: 10px 0;
   height: auto;
   background-color: #fff;
-  border-bottom: 1px solid rgba(0,0,0,.2)
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  z-index: 1000;
 }
 
 #app-content{
   margin-top: 76px;
-
 }
 
 #app-flash{
@@ -23,9 +23,16 @@
   border-width: 1px 0;
   border-style: solid;
   margin-bottom: -41px;
+  z-index: 1000;
 }
 #app-flash p{ line-height: 40px; }
 
 .field_with_errors .form-control{
   background-color: #f2dede;
 }
+
+.col-md-3.heading{
+  padding: 10px 0;
+}
+
+.col-md-3.heading .btn{ float: right; margin-left: 10px; }

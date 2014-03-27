@@ -12,6 +12,23 @@ class ProjectsController < ApplicationController
     @project = Project.find (params[:id])
   end
 
+  def edit
+    @project = Project.find (params[:id])
+    render :new
+  end
+
+  def update
+    @project = Project.find (params[:id])
+    @project.update_attributes(project_attributes)
+
+    if @project.save
+      redirect_to projects_path
+    else
+      flash.now[:error] = "please correct the form"
+      render :new
+    end
+  end
+
   def create
     @project = Project.new(project_attributes)
     
@@ -24,6 +41,10 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    @project = Project.find (params[:id])
+    @project.destroy
+    
+    redirect_to projects_path
   end
 
   private
