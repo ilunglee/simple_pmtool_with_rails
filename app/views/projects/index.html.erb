@@ -1,0 +1,9 @@
+<div class="container">
+<h1>default home</h1>
+<% @projects.each do |project| %>
+  <h2> <%= project.title %> </h2>
+  <p> <%= project.description %> </p>
+  <p> <%= project.created_at.strftime("%Y-%b-%d") %></p>
+  <hr>
+<% end %>
+</div>

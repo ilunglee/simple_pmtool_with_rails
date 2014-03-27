@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PmTool</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div id="app-header">
+    <nav class="container-fluid">
+      <%= link_to "Home", root_path, class: "btn btn-link" %>
+      <%= link_to "New", new_project_path, class: "btn btn-link" %>
+    </nav>
+  </div>
+  <% if flash[:notice] || flash[:error] %>
+    <div id="app-flash" class="bg-danger">
+     <div class="container-fluid">
+      <p class="text-danger"><%= flash[:error] || flash[:danger] %></p>
+     </div>
+    </div>
+  <% end %>
+  <div id="app-content">
+    <%= yield %>
+  </div>
+</body>
+</html>
