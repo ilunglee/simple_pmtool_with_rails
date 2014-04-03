@@ -3,7 +3,13 @@ class ProjectsController < ApplicationController
   before_action :find_project, only: [:show, :edit, :update, :destroy]
   
   def index
-    @projects = Project.all
+    @projects = Project.all.paginate(:page => params[:page], :per_page => 2)
+
+    session[:current_page] = params[:page]
+    if params[:term]
+      @term = params[:term]
+      @projects = @projects.search_by(@term)
+    end
   end
 
   def new

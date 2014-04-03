@@ -1,4 +1,8 @@
 <div class="container">
+<%= form_tag projects_path, method: :get do %>
+  <%= text_field_tag :term, params[:term], class: "form-control"%>
+  <%= submit_tag "Search", class: "btn btn-success", id: "search-submit" %>
+<% end %>
 <h1>default home</h1>
 <% @projects.each do |project| %>
   <div class="row">
@@ -15,4 +19,7 @@
   </div>
   <hr>
 <% end %>
+<%= will_paginate @projects, term: @term, renderer: BootstrapPagination::Rails %>
 </div>
+
+
